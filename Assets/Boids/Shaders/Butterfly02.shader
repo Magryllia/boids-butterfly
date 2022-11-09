@@ -27,8 +27,8 @@
     // Boidの構造体
     struct BoidData
     {
-      float3 velocity; // 速度
-      float3 position; // 位置
+      float3 velocity;
+      float3 position;
     };
 
     #ifdef UNITY_PROCEDURAL_INSTANCING_ENABLED
@@ -60,6 +60,7 @@
       );
     }
 
+    // 羽ばたくアニメーション
     float4 flap(float4 vertex, float rot)
     {
       float sinZ = sin(radians(rot));
@@ -70,7 +71,6 @@
       return vertex;
     }
     
-    // 頂点シェーダ
     void vert(inout appdata_full v)
     {
       #ifdef UNITY_PROCEDURAL_INSTANCING_ENABLED
@@ -78,8 +78,8 @@
         // インスタンスIDからBoidのデータを取得
         BoidData boidData = _BoidDataBuffer[unity_InstanceID];
 
-        float3 pos = boidData.position.xyz; // Boidの位置を取得
-        float3 scl = _ObjectScale;          // Boidのスケールを取得
+        float3 pos = boidData.position.xyz; // Boidの位置
+        float3 scl = _ObjectScale;          // Boidのスケール
 
         // オブジェクト座標からワールド座標に変換する行列を定義
         float4x4 object2world = (float4x4)0;
